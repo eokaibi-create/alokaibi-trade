@@ -4,7 +4,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   const t = getTranslations(locale);
 
-  const content = {
+  const content: Record<string, any> = {
     en: {
       h1: "Privacy Policy",
       lastUpdated: "Last updated: January 2025",
@@ -27,20 +27,9 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
         { title: "Cookie", content: "我们的网站使用必要的Cookie以确保功能正常。未经您的同意，我们不会使用跟踪Cookie或第三方分析工具。" },
       ],
     },
-    ar: {
-      h1: "سياسة الخصوصية",
-      lastUpdated: "آخر تحديث: يناير 2025",
-      sections: [
-        { title: "المعلومات التي نجمعها", content: "نجمع المعلومات التي تقدمها مباشرة، مثل اسمك وبريدك الإلكتروني ورقم هاتفك وتفاصيل شركتك عند تقديم الاستفسارات. كما نجمع تلقائياً بعض المعلومات التقنية بما في ذلك عنوان IP ونوع المتصفح." },
-        { title: "كيف نستخدم معلوماتك", content: "نستخدم المعلومات التي نجمعها للرد على استفساراتك وتقديم خدماتنا التجارية وتحسين موقعنا. لا نبيع معلوماتك الشخصية لأطراف ثالثة." },
-        { title: "أمان البيانات", content: "نطبق إجراءات تقنية وتنظيمية مناسبة لحماية معلوماتك الشخصية من الوصول غير المصرح به أو التعديل أو الإفشاء أو التدمير." },
-        { title: "حقوقك", content: "لديك الحق في الوصول إلى معلوماتك الشخصية أو تحديثها أو حذفها. يمكنك أيضاً طلب نسخة من البيانات التي نحتفظ بها. للتواصل: info@okaibiglobal.com" },
-        { title: "ملفات تعريف الارتباط", content: "يستخدم موقعنا ملفات تعريف الارتباط الأساسية للوظائف. لا نستخدم ملفات تتبع أو تحليلات خارجية دون موافقتك." },
-      ],
-    },
   };
 
-  const data = (content as any)[locale] || content.en;
+  const data = content[locale] || content.en;
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">

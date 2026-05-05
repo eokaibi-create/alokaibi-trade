@@ -15,7 +15,7 @@ async function getData() {
   } catch { return { categories: [], products: [] }; }
 }
 
-function parseName(raw: string) { try { return JSON.parse(raw); } catch { return { en: raw, zh: raw, ar: raw }; } }
+function parseName(raw: string) { try { return JSON.parse(raw); } catch { return { en: raw, zh: raw }; } }
 
 export default async function ProductsPage({ params, searchParams }: { params: Promise<{ locale: string }>, searchParams: Promise<{ category?: string }> }) {
   const { locale } = await params;

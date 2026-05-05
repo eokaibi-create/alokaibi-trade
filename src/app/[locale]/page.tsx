@@ -66,8 +66,8 @@ async function getFeaturedProducts(): Promise<Product[]> {
   }
 }
 
-function parseName(raw: string): { en: string; zh: string; ar: string } {
-  try { return JSON.parse(raw); } catch { return { en: raw, zh: raw, ar: raw }; }
+function parseName(raw: string): { en: string; zh: string } {
+  try { return JSON.parse(raw); } catch { return { en: raw, zh: raw }; }
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {

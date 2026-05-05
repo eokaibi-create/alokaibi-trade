@@ -9,32 +9,31 @@ export default function InquiryPage({ params }: { params: Promise<{ locale: stri
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", category: "", product: "", quantity: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const isAr = locale === "ar";
+  const isZh = locale === "zh";
 
-  // Minimal translations
   const t = {
-    title: isAr ? "تقديم استفسار" : locale === "zh" ? "提交询盘" : "Submit Inquiry",
-    desc: isAr ? "هل أنت مهتم بمنتجاتنا؟ املأ النموذج أدناه وسنرد خلال 24 ساعة." :
-          locale === "zh" ? "对我们的产品感兴趣？填写以下表单，我们将在24小时内联系您。" :
+    title: isZh ? "提交询盘" : "Submit Inquiry",
+    desc: isZh ? "对我们的产品感兴趣？填写以下表单，我们将在24小时内联系您。" :
           "Interested in our products? Fill out the form and we'll respond within 24 hours.",
-    name: isAr ? "الاسم الكامل" : locale === "zh" ? "姓名" : "Full Name",
-    email: isAr ? "البريد الإلكتروني" : locale === "zh" ? "邮箱" : "Email",
-    phone: isAr ? "رقم الهاتف" : locale === "zh" ? "电话" : "Phone",
-    company: isAr ? "الشركة" : locale === "zh" ? "公司" : "Company",
-    category: isAr ? "الفئة" : locale === "zh" ? "分类" : "Category",
-    product: isAr ? "المنتج (اختياري)" : locale === "zh" ? "产品 (选填)" : "Product (Optional)",
-    quantity: isAr ? "الكمية (اختياري)" : locale === "zh" ? "数量 (选填)" : "Quantity (Optional)",
-    message: isAr ? "تفاصيل الاستفسار" : locale === "zh" ? "询盘详情" : "Inquiry Details",
-    submit: isAr ? "إرسال" : locale === "zh" ? "提交询盘" : "Submit Inquiry",
-    success: isAr ? "تم الإرسال بنجاح!" : locale === "zh" ? "提交成功！" : "Submitted successfully!",
-    error: isAr ? "فشل الإرسال" : locale === "zh" ? "提交失败" : "Failed to submit",
+    name: isZh ? "姓名" : "Full Name",
+    email: isZh ? "邮箱" : "Email",
+    phone: isZh ? "电话" : "Phone",
+    company: isZh ? "公司" : "Company",
+    category: isZh ? "分类" : "Category",
+    product: isZh ? "产品（选填）" : "Product (Optional)",
+    quantity: isZh ? "数量（选填）" : "Quantity (Optional)",
+    message: isZh ? "询盘详情" : "Inquiry Details",
+    submit: isZh ? "提交询盘" : "Submit Inquiry",
+    success: isZh ? "提交成功！" : "Submitted successfully!",
+    error: isZh ? "提交失败" : "Failed to submit",
     cats: {
-      electronics: isAr ? "إلكترونيات" : locale === "zh" ? "消费电子" : "Consumer Electronics",
-      autoparts: isAr ? "قطع سيارات" : locale === "zh" ? "汽车配件" : "Auto Parts",
-      furniture: isAr ? "أثاث" : locale === "zh" ? "家具建材" : "Furniture & Building",
-      textiles: isAr ? "منسوجات" : locale === "zh" ? "纺织品" : "Textiles & Apparel",
-      vaporx: isAr ? "VAPORX شيشة" : locale === "zh" ? "VAPORX 水烟与电子烟" : "VAPORX — Hookah & Vaping",
+      electronics: isZh ? "消费电子" : "Consumer Electronics",
+      autoparts: isZh ? "汽车配件" : "Auto Parts",
+      furniture: isZh ? "家具建材" : "Furniture & Building",
+      textiles: isZh ? "纺织品" : "Textiles & Apparel",
+      vaporx: isZh ? "VAPORX 水烟与电子烟" : "VAPORX — Hookah & Vaping",
     },
+    placeholder: isZh ? "请选择..." : "Select...",
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -75,7 +74,7 @@ export default function InquiryPage({ params }: { params: Promise<{ locale: stri
             <label className="text-sm text-gray-500 mb-1 block">{t.category}</label>
             <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}
               className="w-full px-3 py-2 border rounded-lg text-sm" required>
-              <option value="">{isAr ? "اختر..." : locale === "zh" ? "请选择..." : "Select..."}</option>
+              <option value="">{t.placeholder}</option>
               {categoryKeys.map((key) => (
                 <option key={key} value={key}>{(t.cats as any)[key]}</option>
               ))}

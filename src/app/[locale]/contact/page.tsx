@@ -4,33 +4,33 @@ import { use, useState } from "react";
 
 export default function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = use(params);
-  const isAr = locale === "ar";
+  const isZh = locale === "zh";
 
   const tForm = {
-    title: isAr ? "اتصل بنا" : locale === "zh" ? "联系我们" : "Contact Us",
-    desc: isAr ? "لديك سؤال؟ نود التواصل معك." : locale === "zh" ? "有问题或想讨论商机？我们期待您的来信。" : "Have a question? We'd love to hear from you.",
-    name: isAr ? "الاسم" : locale === "zh" ? "姓名" : "Your Name",
-    email: isAr ? "البريد الإلكتروني" : locale === "zh" ? "邮箱" : "Email",
-    phone: isAr ? "الهاتف" : locale === "zh" ? "电话" : "Phone",
-    company: isAr ? "الشركة" : locale === "zh" ? "公司" : "Company",
-    subject: isAr ? "الموضوع" : locale === "zh" ? "主题" : "Subject",
-    message: isAr ? "الرسالة" : locale === "zh" ? "留言" : "Message",
-    submit: isAr ? "إرسال" : locale === "zh" ? "发送留言" : "Send Message",
-    success: isAr ? "تم الإرسال!" : locale === "zh" ? "发送成功！" : "Message sent!",
-    error: isAr ? "فشل الإرسال" : locale === "zh" ? "发送失败" : "Failed to send",
+    title: isZh ? "联系我们" : "Contact Us",
+    desc: isZh ? "有问题或想讨论商机？我们期待您的来信。" : "Have a question? We'd love to hear from you.",
+    name: isZh ? "姓名" : "Your Name",
+    email: isZh ? "邮箱" : "Email",
+    phone: isZh ? "电话" : "Phone",
+    company: isZh ? "公司" : "Company",
+    subject: isZh ? "主题" : "Subject",
+    message: isZh ? "留言" : "Message",
+    submit: isZh ? "发送留言" : "Send Message",
+    success: isZh ? "发送成功！" : "Message sent!",
+    error: isZh ? "发送失败" : "Failed to send",
   };
 
   const tSubjects: Record<string, string> = {
-    general: isAr ? "استفسار عام" : locale === "zh" ? "一般咨询" : "General Inquiry",
-    partnership: isAr ? "شراكة" : locale === "zh" ? "合作机会" : "Partnership",
-    sourcing: isAr ? "توريد" : locale === "zh" ? "产品采购" : "Sourcing",
-    complaint: isAr ? "شكوى" : locale === "zh" ? "投诉反馈" : "Complaint",
+    general: isZh ? "一般咨询" : "General Inquiry",
+    partnership: isZh ? "合作机会" : "Partnership",
+    sourcing: isZh ? "产品采购" : "Sourcing",
+    complaint: isZh ? "投诉反馈" : "Complaint",
   };
 
   const contactInfo = {
     email: "info@okaibiglobal.com",
     phone: "+86-571-8888-8888",
-    address: isAr ? "هانغتشو، الصين" : locale === "zh" ? "中国浙江省杭州市" : "Hangzhou, Zhejiang, China",
+    address: isZh ? "中国浙江省杭州市" : "Hangzhou, Zhejiang, China",
   };
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", subject: "", message: "" });
@@ -70,7 +70,7 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
               <div>
                 <label className="text-sm text-gray-500 mb-1 block">{tForm.subject}</label>
                 <select value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="w-full px-3 py-2 border rounded-lg text-sm" required>
-                  <option value="">{isAr ? "اختر..." : locale === "zh" ? "请选择..." : "Select..."}</option>
+                  <option value="">{isZh ? "请选择..." : "Select..."}</option>
                   {Object.entries(tSubjects).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                 </select>
               </div>
@@ -87,11 +87,11 @@ export default function ContactPage({ params }: { params: Promise<{ locale: stri
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="font-bold text-gray-900 mb-4">{locale === "zh" ? "联系信息" : isAr ? "معلومات الاتصال" : "Contact Info"}</h3>
+          <h3 className="font-bold text-gray-900 mb-4">{isZh ? "联系信息" : "Contact Info"}</h3>
           <div className="space-y-4 text-sm">
             <div><span className="text-gray-400">Email:</span><br /><a href={`mailto:${contactInfo.email}`} className="text-blue-600 hover:underline">{contactInfo.email}</a></div>
             <div><span className="text-gray-400">Phone:</span><br />{contactInfo.phone}</div>
-            <div><span className="text-gray-400">{isAr ? "العنوان" : locale === "zh" ? "地址" : "Address"}:</span><br />{contactInfo.address}</div>
+            <div><span className="text-gray-400">{isZh ? "地址" : "Address"}:</span><br />{contactInfo.address}</div>
           </div>
         </div>
       </div>

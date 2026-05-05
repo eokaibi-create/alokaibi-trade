@@ -17,7 +17,7 @@ async function getProduct(slug: string) {
   } catch { return null; }
 }
 
-function parseName(raw: string) { try { return JSON.parse(raw); } catch { return { en: raw, zh: raw, ar: raw }; } }
+function parseName(raw: string) { try { return JSON.parse(raw); } catch { return { en: raw, zh: raw }; } }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await params;

@@ -19,17 +19,16 @@ export default async function LocaleLayout({
     { href: `/${locale}/about`, label: t.nav.about },
   ];
 
-  const langLinks: Record<string, string> = { en: "/en", zh: "/zh", ar: "/ar" };
-  const dir = locale === "ar" ? "rtl" : "ltr";
+  const langLinks: Record<string, string> = { en: "/en", zh: "/zh" };
 
   return (
-    <div dir={dir}>
+    <div>
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             <a href={`/${locale}`} className="text-xl font-bold text-gray-900">OKAIBI</a>
             <nav className="hidden md:flex items-center gap-6">
-              {navItems.map((item: any) => (
+              {navItems.map((item) => (
                 <a key={item.href} href={item.href} className="text-sm text-gray-600 hover:text-blue-600 transition">{item.label}</a>
               ))}
             </nav>
