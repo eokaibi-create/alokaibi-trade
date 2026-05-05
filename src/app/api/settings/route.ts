@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb, parseBody } from "@/lib/db";
 import { verifyToken, getAdminToken, hashPassword } from "@/lib/auth";
+import { invalidateCache } from "@/lib/settings";
 
 export async function GET() {
   try {
@@ -33,11 +34,20 @@ export async function PUT(req: NextRequest) {
     for (const [key, value] of Object.entries(body)) {
       if (key === "new_password" && value) {
         const hash = hashPassword(value as string);
-        await db.execute("INSERT OR REPLACE INTO settings (key, value, updated_at) VALUES (?, ?, ?)", ["admin_password_hash", hash, t]);
-      } else {
-        await db.execute("INSERT OR REPLACE INTO settings (key, value, updated_at) VALUES (?, ?, ?)", [key, String(value), t]);
+        await db.execute(
+          "INSERT OR REPLACE INTO settings (key, value, updated_at) VALUES (?, ?, ?)",
+          ["admin_password_hash", hash, t]
+        );
+      } else if (key !== "_new_password" && key !== "_confirm_password") {
+        await db.execute(
+          "INSERT OR REPLACE INTO settings (key, value, updated_at) VALUES (?, ?, ?)",
+          [key, String(value), t]
+        );
       }
     }
+
+    // Invalidate the site settings cache so frontend reads fresh data
+    invalidateCache();
 
     return NextResponse.json({ success: true });
   } catch (err: any) {
