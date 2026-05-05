@@ -1,0 +1,142 @@
+{
+  "site": {
+    "name": "OKAIBI — 全球贸易",
+    "desc": "您值得信赖的全球贸易合作伙伴"
+  },
+  "nav": {
+    "home": "首页",
+    "products": "产品中心",
+    "brands": "品牌专区",
+    "inquiry": "在线询盘",
+    "contact": "联系我们",
+    "about": "关于我们",
+    "privacy": "隐私政策",
+    "terms": "服务条款"
+  },
+  "home": {
+    "hero": {
+      "title": "您值得信赖的全球贸易合作伙伴",
+      "subtitle": "连接优质制造商与全球买家，覆盖消费电子、汽车配件、家具建材、纺织品及蒸汽产品等领域。",
+      "cta": "浏览产品"
+    },
+    "categories": "产品分类",
+    "categories_desc": "发现我们多样化、高品质的产品系列，覆盖多个行业领域。",
+    "why_us": "为什么选择 OKAIBI",
+    "why_us_desc": "我们提供端到端的贸易解决方案，为您连接全球最优质的制造商和供应商。",
+    "reasons": [
+      { "title": "品质保证", "desc": "每批货物出厂前均经过严格质检。" },
+      { "title": "全球网络", "desc": "与亚洲、欧洲和美洲的优质制造商建立了长期合作关系。" },
+      { "title": "一站式服务", "desc": "从采购到物流，我们处理全流程的每一个环节。" },
+      { "title": "定制方案", "desc": "根据您的具体业务需求，提供量身定制的采购解决方案。" }
+    ],
+    "cta_section": {
+      "title": "准备好开始采购了吗？",
+      "desc": "将您的需求告诉我们，我们会为您匹配合适的供应商。",
+      "button": "提交询盘"
+    }
+  },
+  "products": {
+    "title": "产品中心",
+    "desc": "浏览我们全面的产品目录，覆盖多个品类。",
+    "detail": "产品详情",
+    "view_detail": "查看详情",
+    "inquiry": "发送询盘",
+    "back": "返回产品列表",
+    "not_found": "未找到该产品",
+    "all_categories": "全部分类"
+  },
+  "brands": {
+    "title": "品牌专区",
+    "desc": "探索我们的自有品牌及其产品线。",
+    "coming_soon": "即将推出",
+    "visit_site": "访问官网"
+  },
+  "inquiry": {
+    "title": "提交询盘",
+    "desc": "对我们的产品感兴趣？填写以下表单，我们的团队将在24小时内与您联系。",
+    "form": {
+      "name": "姓名",
+      "email": "邮箱地址",
+      "phone": "联系电话",
+      "company": "公司名称",
+      "category": "产品分类",
+      "product": "产品名称（选填）",
+      "quantity": "预估数量（选填）",
+      "message": "询盘详情",
+      "message_placeholder": "请描述您感兴趣的产品...",
+      "submit": "提交询盘",
+      "success": "感谢您！您的询盘已成功提交。我们将在24小时内与您联系。",
+      "error": "提交失败，请重试。"
+    },
+    "categories": {
+      "electronics": "消费电子",
+      "autoparts": "汽车配件",
+      "furniture": "家具与建材",
+      "textiles": "纺织品与服装",
+      "vaporx": "VAPORX — 水烟与电子烟产品"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "desc": "有问题或想讨论商机？我们期待您的来信。",
+    "form": {
+      "name": "您的姓名",
+      "email": "邮箱地址",
+      "phone": "联系电话",
+      "company": "公司名称",
+      "subject": "主题",
+      "subject_placeholder": "请选择主题...",
+      "subjects": {
+        "general": "一般咨询",
+        "partnership": "合作机会",
+        "sourcing": "产品采购",
+        "complaint": "投诉与反馈"
+      },
+      "message": "留言内容",
+      "submit": "发送留言",
+      "success": "感谢您！您的留言已成功发送。",
+      "error": "发送失败，请重试。"
+    },
+    "info": {
+      "email": "info@okaibiglobal.com",
+      "phone": "+86-571-8888-8888",
+      "address": "中国浙江省杭州市"
+    }
+  },
+  "about": {
+    "title": "关于 OKAIBI",
+    "intro": "OKAIBI 是一家全球贸易公司，致力于连接优质制造商与国际买家。",
+    "mission": {
+      "title": "我们的使命",
+      "desc": "通过提供可靠的采购、质量保证和无缝的物流服务，简化全球贸易。"
+    },
+    "values": {
+      "title": "我们的价值观",
+      "items": [
+        { "title": "诚信", "desc": "通过透明和诚实的商业实践建立信任。" },
+        { "title": "品质", "desc": "绝不妥协质量，确保每件产品都符合标准。" },
+        { "title": "创新", "desc": "利用技术简化贸易流程，提高效率。" },
+        { "title": "伙伴关系", "desc": "我们相信长期合作，而非一次性交易。" }
+      ]
+    },
+    "contact_cta": "准备好合作了吗？今天就联系我们。"
+  },
+  "footer": {
+    "rights": "保留所有权利。",
+    "tagline": "自2024年以来，您值得信赖的全球贸易合作伙伴。",
+    "quick_links": "快速链接",
+    "contact_info": "联系方式",
+    "follow_us": "关注我们"
+  },
+  "not_found": {
+    "title": "页面未找到",
+    "desc": "您访问的页面不存在。",
+    "back": "返回首页"
+  },
+  "language": "语言",
+  "languages": {
+    "en": "English",
+    "zh": "中文",
+    "ar": "العربية"
+  }
+}
