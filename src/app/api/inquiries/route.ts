@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb, uuid, now, parseBody } from "@/lib/db";
 import { verifyToken, getAdminToken } from "@/lib/auth";
+import { sendInquiryNotification } from "@/lib/email";
 
 export async function GET(req: NextRequest) {
   try {
@@ -54,6 +55,9 @@ export async function POST(req: NextRequest) {
         [uuid(), name, email, phone || "", company || "", "inquiry", category || "", t, t]
       );
     }
+
+    // Send email notification (fire-and-forget)
+    sendInquiryNotification({ name, email, phone, company, category, product_name, quantity, message }).catch(() => {});
 
     return NextResponse.json({ id, success: true });
   } catch (err: any) {

@@ -1,57 +1,35 @@
 import type { Metadata } from "next";
 import { getTranslations } from "@/lib/translations";
 import { getServerSettings } from "@/lib/server-settings";
+import WhatsAppWrapper from "@/components/WhatsAppWrapper";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const settings = await getServerSettings();
   const t = getTranslations(locale);
-  const siteName = settings.site_name || "OKAIBI";
-  const siteDesc = locale === "zh" && settings.site_tagline
-    ? (settings as any)[`hero_subtitle_${locale}`] || settings.site_tagline
-    : (settings.site_description || t.site.desc);
-
+  const siteName = settings.site_name || "ALOKAIBI INT TRADE";
   return {
-    title: {
-      default: siteName,
-      template: `%s | ${siteName}`,
-    },
-    description: siteDesc,
-    keywords: settings.site_keywords || "global trading, B2B, wholesale, import, export",
-    openGraph: {
-      title: siteName,
-      description: siteDesc,
-      type: "website",
-      locale: locale === "zh" ? "zh_CN" : "en_US",
-    },
+    title: { default: siteName, template: `%s | ${siteName}` },
+    description: settings.site_description || t.site.desc,
+    keywords: settings.site_keywords || "global trading, B2B, wholesale, import, export, China sourcing",
+    openGraph: { title: siteName, description: settings.site_description || t.site.desc, type: "website", locale: locale === "zh" ? "zh_CN" : "en_US" },
   };
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = getTranslations(locale);
   const settings = await getServerSettings();
   const isZh = locale === "zh";
 
-  const siteName = settings.site_name || "OKAIBI";
-  const siteTagline = settings.site_tagline || "Your trusted partner in global trade";
-  const contactEmail = settings.contact_email || "info@okaibiglobal.com";
-  const contactPhone = settings.contact_phone || "+86-571-8888-8888";
-  const contactAddress = isZh && settings.contact_address_zh
-    ? settings.contact_address_zh
-    : (settings.contact_address_en || "Hangzhou, Zhejiang Province, China");
-  const footerTagline = isZh && settings.footer_tagline_zh
-    ? settings.footer_tagline_zh
-    : (settings.footer_tagline_en || siteTagline);
-  const footerCopyright = settings.footer_copyright || `© 2024 ${siteName}. All rights reserved.`;
+  const siteName = settings.site_name || "ALOKAIBI INT TRADE";
+  const contactEmail = settings.contact_email || "eokaibi@gmail.com";
+  const contactPhone = settings.contact_phone || "+601123093400";
+  const whatsappNumber = settings.whatsapp_number || "+601123093400";
+  const contactAddress = isZh && settings.contact_address_zh ? settings.contact_address_zh : (settings.contact_address_en || "Kuala Lumpur, Malaysia");
+  const footerTagline = isZh && settings.footer_tagline_zh ? settings.footer_tagline_zh : (settings.footer_tagline_en || "Your trusted partner in global trade since 2020");
+  const footerCopyright = settings.footer_copyright || `© 2020 ALOKAIBI INT TRADE. All rights reserved.`;
   const siteLogo = settings.site_logo || "";
-  const whatsappNumber = settings.whatsapp_number || "";
   const gaId = settings.google_analytics_id || "";
   const gtmId = settings.google_tag_manager || "";
 
@@ -63,49 +41,28 @@ export default async function LocaleLayout({
     { href: `/${locale}/contact`, label: t.nav.contact },
     { href: `/${locale}/about`, label: t.nav.about },
   ];
-
   const langLinks: Record<string, string> = { en: "/en", zh: "/zh" };
 
   return (
     <div>
-      {/* Google Analytics */}
-      {gaId && (
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
-      )}
-      {gaId && (
-        <script dangerouslySetInnerHTML={{
-          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');`
-        }} />
-      )}
-      {/* Google Tag Manager */}
-      {gtmId && (
-        <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`} height="0" width="0" style={{display:"none",visibility:"hidden"}} /></noscript>
-      )}
+      {gaId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />}
+      {gaId && <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');`}} />}
+      {gtmId && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`} height="0" width="0" style={{display:"none",visibility:"hidden"}} /></noscript>}
 
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             <a href={`/${locale}`} className="flex items-center gap-2">
-              {siteLogo ? (
-                <img src={siteLogo} alt={siteName} className="h-8 w-auto" />
-              ) : (
-                <span className="text-xl font-bold text-gray-900">{siteName}</span>
-              )}
+              {siteLogo ? <img src={siteLogo} alt={siteName} className="h-8 w-auto" /> : <span className="text-xl font-bold text-gray-900">{siteName}</span>}
             </a>
             <nav className="hidden md:flex items-center gap-6">
               {navItems.map((item) => (
-                <a key={item.href} href={item.href}
-                  className="text-sm text-gray-600 hover:text-blue-600 transition font-medium">{item.label}</a>
+                <a key={item.href} href={item.href} className="text-sm text-gray-600 hover:text-blue-600 transition font-medium">{item.label}</a>
               ))}
             </nav>
             <div className="flex items-center gap-2">
               {Object.entries(langLinks).map(([code, href]) => (
-                <a key={code} href={href}
-                  className={`text-xs px-2 py-1 rounded transition ${
-                    code === locale
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-400 hover:text-blue-600 hover:bg-gray-50"
-                  }`}>{code.toUpperCase()}</a>
+                <a key={code} href={href} className={`text-xs px-2 py-1 rounded transition ${code === locale ? "bg-blue-600 text-white" : "text-gray-400 hover:text-blue-600 hover:bg-gray-50"}`}>{code.toUpperCase()}</a>
               ))}
             </div>
           </div>
@@ -145,6 +102,8 @@ export default async function LocaleLayout({
           </div>
         </div>
       </footer>
+
+      <WhatsAppWrapper number={whatsappNumber} />
     </div>
   );
 }

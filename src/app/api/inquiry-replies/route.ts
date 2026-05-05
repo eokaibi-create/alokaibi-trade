@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb, uuid, now, parseBody } from "@/lib/db";
 import { verifyToken, getAdminToken } from "@/lib/auth";
+import { sendReplyNotification } from "@/lib/email";
 
 export async function GET(req: NextRequest) {
   try {
@@ -42,9 +43,14 @@ export async function POST(req: NextRequest) {
       "INSERT INTO inquiry_replies (id, inquiry_id, message, created_at) VALUES (?, ?, ?, ?)",
       [id, inquiry_id, message, t]
     );
-
-    // Auto-update status to replied
     await db.execute("UPDATE inquiries SET status='replied' WHERE id=?", [inquiry_id]);
+
+    // Send email notification to the inquirer
+    const inquiry = await db.execute("SELECT name, email FROM inquiries WHERE id=?", [inquiry_id]);
+    if (inquiry.rows.length > 0) {
+      const row = inquiry.rows[0] as any;
+      sendReplyNotification(row.name, row.email, message).catch(() => {});
+    }
 
     return NextResponse.json({ id, success: true });
   } catch (err: any) {
